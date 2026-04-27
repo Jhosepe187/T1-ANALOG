@@ -1,12 +1,10 @@
-
-
-
 class PuestoDeTrabajo:
-    def __init__(self, codigo = 0, descripcion = "", area_solicitante = "", plazas_requeridas = 0):
+    def __init__(self, codigo = 0, descripcion = "", area_solicitante = "", plazas_requeridas = 0, sueldo = 0):
         self.codigo = codigo
         self.descripcion = descripcion
         self.area_solicitante = area_solicitante
         self.plazas_requeridas = plazas_requeridas
+        self.sueldo = sueldo
         
     
     def __str__(self):
@@ -14,3 +12,10 @@ class PuestoDeTrabajo:
     
     def __repr__(self):
         return f"{self.codigo} | {self.descripcion} | (S/{self.area_solicitante} | {self.plazas_requeridas})"
+    
+def buscaPuesto(lst, zapa) -> bool:
+    for z in lst:
+        if z.codigo == zapa.codigo and z.descripcion == zapa.descripcion and z.area_solicitante == zapa.area_solicitante and z.plazas_requeridas == zapa.plazas_requeridas:
+            return True
+    return False
+
