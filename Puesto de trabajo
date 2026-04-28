@@ -34,14 +34,12 @@ lista = []
 while True:
     opc = int(input("1-Agregar, 2-Mostrar puestos, 3-Borrar Puesto, 4-Buscar Sueldo, 5-Puestos a contratar, 9-Salir"))
     if opc == 1:
-        #crear nuevo
-        codigo = int(input("Ingrese codigo:"))
-        descripcion = input("Ingrese descripcion:")
-        area_solicitante = input("Ingrese area solicitante:")
-        plazas_requeridas = int(input("Ingrese plazas requeridas"))
-        sueldo = float(input("Ingrese sueldp"))
+        codigo = int(input("Ingrese codigo: "))
+        descripcion = input("Ingrese descripcion: ")
+        area_solicitante = input("Ingrese area solicitante: ")
+        plazas_requeridas = int(input("Ingrese plazas requeridas: "))
+        sueldo = float(input("Ingrese sueldo: "))
         nuevo = PuestoDeTrabajo(codigo, descripcion, area_solicitante, plazas_requeridas, sueldo)
-        #validar que no existe
         if not buscaPuesto(lista, nuevo):
             print(nuevo)
             lista.append(PuestoDeTrabajo(codigo, descripcion, area_solicitante, plazas_requeridas, sueldo))
@@ -50,11 +48,43 @@ while True:
         print(lista)
     elif opc == 3:
         codEliPuesto = int(input("ingrese codigo de puesto a eliminar"))
-        #elimina lineal
         for idx, q in enumerate(lista):
             if q.codigo == codEliPuesto:
                 del lista[idx]
     elif opc == 4:
         buscarSueldo(lista)
         print(lista)
+    elif opc == 5:
 
+        monto = float(input("Ingrese monto total a invertir: "))
+        n = len(lista)
+
+        for i in range(n - 1):
+          mayor = i
+
+        for j in range(i + 1, n):
+            total_j = lista[j].plazas_requeridas * lista[j].sueldo
+            total_m = lista[mayor].plazas_requeridas * lista[mayor].sueldo
+
+            if total_j > total_m:
+                mayor = j
+
+        lista[i], lista[mayor] = lista[mayor], lista[i]
+
+        acumulado = 0
+
+        for x in lista:
+           total = x.plazas_requeridas * x.sueldo
+
+        if acumulado + total <= monto:
+            print(x, "Total requerido:", total)
+            acumulado += total
+        else:
+            break
+
+        print("Monto usado:", acumulado)
+    elif opc == 9:
+        print("Programa terminado")
+        break
+    else:
+        print("Opcion invalida")
