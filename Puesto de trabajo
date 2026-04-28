@@ -8,10 +8,10 @@ class PuestoDeTrabajo:
         
     
     def __str__(self):
-        return f"{self.codigo} | {self.descripcion} | (S/{self.area_solicitante} | {self.plazas_requeridas})"
+        return f"Codigo: {self.codigo} | Descripcion: {self.descripcion} | Area Solicitante: {self.area_solicitante} | Plazas Requeridas: {self.plazas_requeridas}"
     
     def __repr__(self):
-        return f"{self.codigo} | {self.descripcion} | (S/{self.area_solicitante} | {self.plazas_requeridas})"
+        return f"Codigo: {self.codigo} | Descripcion: {self.descripcion} | Area Solicitante: {self.area_solicitante} | Plazas Requeridas: {self.plazas_requeridas}"
     
 def buscaPuesto(lst, zapa) -> bool:
     for z in lst:
@@ -29,3 +29,32 @@ def buscarSueldo(lst):
             j -= 1
 
         lst[j+1] = aux
+
+lista = []
+while True:
+    opc = int(input("1-Agregar, 2-Mostrar puestos, 3-Borrar Puesto, 4-Buscar Sueldo, 5-Puestos a contratar, 9-Salir"))
+    if opc == 1:
+        #crear nuevo
+        codigo = int(input("Ingrese codigo:"))
+        descripcion = input("Ingrese descripcion:")
+        area_solicitante = input("Ingrese area solicitante:")
+        plazas_requeridas = int(input("Ingrese plazas requeridas"))
+        sueldo = float(input("Ingrese sueldp"))
+        nuevo = PuestoDeTrabajo(codigo, descripcion, area_solicitante, plazas_requeridas, sueldo)
+        #validar que no existe
+        if not buscaPuesto(lista, nuevo):
+            print(nuevo)
+            lista.append(PuestoDeTrabajo(codigo, descripcion, area_solicitante, plazas_requeridas, sueldo))
+            print(len(lista))
+    elif opc == 2:
+        print(lista)
+    elif opc == 3:
+        codEliPuesto = int(input("ingrese codigo de puesto a eliminar"))
+        #elimina lineal
+        for idx, q in enumerate(lista):
+            if q.codigo == codEliPuesto:
+                del lista[idx]
+    elif opc == 4:
+        buscarSueldo(lista)
+        print(lista)
+
